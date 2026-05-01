@@ -19,12 +19,6 @@ const Login = () => {
     
     try {
       // Demo Credentials: If using the demo credentials, bypass Firebase
-      if (email === 'admin@careease.com' && password === 'admin123') {
-        const { mockLogin } = await import('../store/useAuthStore');
-        await mockLogin();
-        navigate('/');
-        return;
-      }
       await signInWithEmailAndPassword(auth, email, password);
       navigate('/');
     } catch (err: any) {
@@ -94,11 +88,6 @@ const Login = () => {
           <button type="submit" className={styles.submitBtn} disabled={loading}>
             {loading ? 'Authenticating...' : 'Sign In'}
           </button>
-
-          <div className={styles.demoHint}>
-            <p>Demo Credentials:</p>
-            <code>admin@careease.com / admin123</code>
-          </div>
 
           <p className={styles.switchText}>
             New provider? <Link to="/signup">Create an account</Link>
