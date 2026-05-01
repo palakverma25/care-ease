@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../lib/firebase';
-import { LogIn, Mail, Lock, ShieldCheck } from 'lucide-react';
+import { Mail, Lock, ShieldCheck } from 'lucide-react';
 import styles from './Login.module.css';
 
 const Login = () => {
@@ -50,7 +50,6 @@ const Login = () => {
       <div className={styles.rightPane}>
         <form className={`${styles.loginCard} glass`} onSubmit={handleLogin}>
           <div className={styles.header}>
-            <LogIn size={32} color="var(--primary)" />
             <h2>Provider Login</h2>
             <p>Access your healthcare dashboard</p>
           </div>

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../lib/firebase';
-import { UserPlus, Mail, Lock, ShieldCheck } from 'lucide-react';
+import { Mail, Lock, ShieldCheck } from 'lucide-react';
 import styles from './Login.module.css';
 
 const SignUp = () => {
@@ -49,7 +49,6 @@ const SignUp = () => {
       <div className={styles.rightPane}>
         <form className={`${styles.loginCard} glass`} onSubmit={handleSignUp}>
           <div className={styles.header}>
-            <UserPlus size={32} color="var(--primary)" />
             <h2>Create Account</h2>
             <p>Register as a healthcare provider</p>
           </div>
