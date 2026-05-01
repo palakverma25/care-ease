@@ -195,6 +195,23 @@
   margin-top: 0.25rem;
 }
 
+.switchText {
+  text-align: center;
+  margin-top: 1.5rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.switchText a {
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.switchText a:hover {
+  text-decoration: underline;
+}
+
 @media (max-width: 1024px) {
   .leftPane {
     display: none;

@@ -1,34 +1,27 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../lib/firebase';
-import { LogIn, Mail, Lock, ShieldCheck } from 'lucide-react';
+import { UserPlus, Mail, Lock, ShieldCheck } from 'lucide-react';
 import styles from './Login.module.css';
 
-const Login = () => {
+const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError('');
-    
+
     try {
-      // Demo Credentials: If using the demo credentials, bypass Firebase
-      if (email === 'admin@careease.com' && password === 'admin123') {
-        const { mockLogin } = await import('../store/useAuthStore');
-        await mockLogin();
-        navigate('/');
-        return;
-      }
-      await signInWithEmailAndPassword(auth, email, password);
+      await createUserWithEmailAndPassword(auth, email, password);
       navigate('/');
     } catch (err: any) {
-      setError(err.message || 'Failed to login. Please check your credentials.');
+      setError(err.message || 'Failed to create account.');
     } finally {
       setLoading(false);
     }
@@ -42,23 +35,23 @@ const Login = () => {
           <h1>CareEase</h1>
         </div>
         <div className={styles.heroText}>
-          <h2>The future of B2B Healthcare is here.</h2>
-          <p>Manage your patients, analyze health trends, and optimize your clinic operations with state-of-the-art tools.</p>
+          <h2>Join the future of Healthcare.</h2>
+          <p>Create your provider account and start managing your clinic with ease.</p>
         </div>
         <div className={styles.features}>
           <div className={styles.feature}>
             <ShieldCheck className={styles.featureIcon} />
-            <span>HIPAA Compliant Security</span>
+            <span>Secure & HIPAA Compliant</span>
           </div>
         </div>
       </div>
       
       <div className={styles.rightPane}>
-        <form className={`${styles.loginCard} glass`} onSubmit={handleLogin}>
+        <form className={`${styles.loginCard} glass`} onSubmit={handleSignUp}>
           <div className={styles.header}>
-            <LogIn size={32} color="var(--primary)" />
-            <h2>Provider Login</h2>
-            <p>Access your healthcare dashboard</p>
+            <UserPlus size={32} color="var(--primary)" />
+            <h2>Create Account</h2>
+            <p>Register as a healthcare provider</p>
           </div>
 
           {error && <div className={styles.error}>{error}</div>}
@@ -92,16 +85,11 @@ const Login = () => {
           </div>
 
           <button type="submit" className={styles.submitBtn} disabled={loading}>
-            {loading ? 'Authenticating...' : 'Sign In'}
+            {loading ? 'Creating Account...' : 'Sign Up'}
           </button>
 
-          <div className={styles.demoHint}>
-            <p>Demo Credentials:</p>
-            <code>admin@careease.com / admin123</code>
-          </div>
-
           <p className={styles.switchText}>
-            New provider? <Link to="/signup">Create an account</Link>
+            Already have an account? <Link to="/login">Sign In</Link>
           </p>
         </form>
       </div>
@@ -109,4 +97,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUp;
