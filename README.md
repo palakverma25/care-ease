@@ -1,73 +1,66 @@
-# React + TypeScript + Vite
+# 🏥 CareEase - B2B Healthcare SaaS
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+CareEase is a premium, state-of-the-art Healthcare SaaS platform designed for medical providers. It offers a seamless, high-performance interface for managing patients, analyzing clinic performance, and handling real-time notifications.
 
-Currently, two official plugins are available:
+![CareEase Dashboard](https://raw.githubusercontent.com/palakverma25/care-ease/main/src/assets/vite.svg)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## ✨ Key Features
 
-## React Compiler
+- **🔐 Secure Authentication**: Integrated with Firebase Authentication (Email/Password & Demo Mode fallback).
+- **📊 Real-time Analytics**: High-fidelity charts for revenue, efficiency, and patient demographics using Recharts.
+- **👥 Patient Management**:
+  - Dual View: Seamless toggle between **Grid** and **List** views.
+  - Search & Filter: Instant search across patient names and conditions.
+  - Add Patient: Reusable modal interface for quick patient onboarding.
+- **🔔 Notifications**: Service Worker-based notification system for critical alerts and updates.
+- **💎 Premium UI/UX**: Modern glassmorphism aesthetic with responsive design and smooth animations.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🚀 Tech Stack
 
-## Expanding the ESLint configuration
+- **Frontend**: React 18, TypeScript, Vite
+- **Styling**: Vanilla CSS Modules (Glassmorphism design system)
+- **State Management**: Zustand
+- **Charts**: Recharts
+- **Icons**: Lucide React
+- **Auth**: Firebase Authentication
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🛠️ Getting Started
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Prerequisites
+- Node.js (v18 or higher)
+- npm or yarn
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/palakverma25/care-ease.git
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Set up environment variables:
+   Create a `.env` file in the root directory and add your Firebase credentials:
+   ```dotenv
+   VITE_FIREBASE_API_KEY=your_api_key
+   VITE_FIREBASE_AUTH_DOMAIN=your_auth_domain
+   VITE_FIREBASE_PROJECT_ID=your_project_id
+   VITE_FIREBASE_STORAGE_BUCKET=your_storage_bucket
+   VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+   VITE_FIREBASE_APP_ID=your_app_id
+   ```
+4. Run the development server:
+   ```bash
+   npm run dev
+   ```
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 📦 Deployment
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+The project is optimized for **Vercel**. When deploying, ensure all `VITE_` environment variables are added to the Vercel dashboard.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 📄 License
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+This project is for demonstration purposes.
+
+---
+Built with ❤️ for Modern Healthcare.
