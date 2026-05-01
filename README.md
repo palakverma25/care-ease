@@ -2,8 +2,6 @@
 
 CareEase is a premium, state-of-the-art Healthcare SaaS platform designed for medical providers. It offers a seamless, high-performance interface for managing patients, analyzing clinic performance, and handling real-time notifications.
 
-![CareEase Dashboard](https://raw.githubusercontent.com/palakverma25/care-ease/main/src/assets/vite.svg)
-
 ## ✨ Key Features
 
 - **🔐 Secure Authentication**: Integrated with Firebase Authentication (Email/Password & Demo Mode fallback).
