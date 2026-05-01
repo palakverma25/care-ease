@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { LayoutGrid, List, Search, Plus, MoreVertical } from 'lucide-react';
 import styles from './Patients.module.css';
+import AddPatientModal from '../components/AddPatientModal';
 
 const initialPatients = [
   { id: 1, name: 'Alice Johnson', age: 28, gender: 'Female', condition: 'Hypertension', status: 'Stable', lastVisit: '2024-03-15' },
@@ -16,26 +17,18 @@ const Patients = () => {
   const [search, setSearch] = useState('');
   const [patients, setPatients] = useState(initialPatients);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [newPatient, setNewPatient] = useState({
-    name: '',
-    age: '',
-    gender: 'Female',
-    condition: '',
-  });
 
-  const handleAddPatient = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSavePatient = (data: any) => {
     const patientToAdd = {
       id: patients.length + 1,
-      ...newPatient,
-      age: parseInt(newPatient.age as string),
+      ...data,
+      age: parseInt(data.age as string),
       status: 'Stable',
       lastVisit: new Date().toISOString().split('T')[0],
     };
     
     setPatients([patientToAdd, ...patients]);
     setIsModalOpen(false);
-    setNewPatient({ name: '', age: '', gender: 'Female', condition: '' });
 
     // Trigger notification
     if ('Notification' in window && Notification.permission === 'granted') {
@@ -89,59 +82,11 @@ const Patients = () => {
         </div>
       </header>
 
-      {isModalOpen && (
-        <div className={styles.modalOverlay}>
-          <div className={`${styles.modal} glass`}>
-            <h3>Add New Patient</h3>
-            <form onSubmit={handleAddPatient} className={styles.form}>
-              <div className={styles.inputGroup}>
-                <label>Full Name</label>
-                <input 
-                  type="text" 
-                  value={newPatient.name}
-                  onChange={(e) => setNewPatient({...newPatient, name: e.target.value})}
-                  required 
-                />
-              </div>
-              <div className={styles.row}>
-                <div className={styles.inputGroup}>
-                  <label>Age</label>
-                  <input 
-                    type="number" 
-                    value={newPatient.age}
-                    onChange={(e) => setNewPatient({...newPatient, age: e.target.value})}
-                    required 
-                  />
-                </div>
-                <div className={styles.inputGroup}>
-                  <label>Gender</label>
-                  <select 
-                    value={newPatient.gender}
-                    onChange={(e) => setNewPatient({...newPatient, gender: e.target.value})}
-                  >
-                    <option value="Female">Female</option>
-                    <option value="Male">Male</option>
-                    <option value="Other">Other</option>
-                  </select>
-                </div>
-              </div>
-              <div className={styles.inputGroup}>
-                <label>Condition</label>
-                <input 
-                  type="text" 
-                  value={newPatient.condition}
-                  onChange={(e) => setNewPatient({...newPatient, condition: e.target.value})}
-                  required 
-                />
-              </div>
-              <div className={styles.modalActions}>
-                <button type="button" className={styles.cancelBtn} onClick={() => setIsModalOpen(false)}>Cancel</button>
-                <button type="submit" className={styles.saveBtn}>Save Patient</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
+      <AddPatientModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+        onSave={handleSavePatient} 
+      />
 
       {view === 'grid' ? (
         <div className={styles.grid}>
