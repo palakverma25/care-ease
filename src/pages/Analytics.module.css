@@ -88,8 +88,30 @@
 .up { color: var(--primary); }
 .down { color: var(--text-muted); }
 
-@media (max-width: 600px) {
+@media (max-width: 1024px) {
   .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .card, .fullCard {
+    padding: 1.25rem;
+  }
+  
+  .legend {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .kpiGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .kpiGrid {
     grid-template-columns: 1fr;
   }
 }

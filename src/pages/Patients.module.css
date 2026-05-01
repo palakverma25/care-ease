@@ -222,6 +222,22 @@
   .searchWrapper input {
     width: 100%;
   }
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .listContainer {
+    overflow-x: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    text-align: center;
+    justify-content: center;
+  }
+  .title {
+    width: 100%;
+  }
 }
 
 /* Modal Styles */
@@ -259,6 +275,12 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
+}
+
+@media (max-width: 480px) {
+  .row {
+    grid-template-columns: 1fr;
+  }
 }
 
 .modal h3 {

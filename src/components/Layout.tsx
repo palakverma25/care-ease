@@ -1,11 +1,19 @@
-import { Outlet, NavLink, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Outlet, NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { useAuthStore } from '../store/useAuthStore';
-import { LayoutDashboard, Users, BarChart3, LogOut, Bell } from 'lucide-react';
+import { LayoutDashboard, Users, BarChart3, LogOut, Bell, Menu, X } from 'lucide-react';
 import styles from './Layout.module.css';
 
 const Layout = () => {
   const { logout, user } = useAuthStore();
   const navigate = useNavigate();
+  const location = useLocation();
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  // Close sidebar on navigation (mobile)
+  useEffect(() => {
+    setIsSidebarOpen(false);
+  }, [location]);
 
   const handleLogout = async () => {
     await logout();
@@ -27,10 +35,26 @@ const Layout = () => {
 
   return (
     <div className={styles.container}>
-      <aside className={`${styles.sidebar} glass`}>
-        <div className={styles.logo}>
-          <div className={styles.logoIcon}>C</div>
-          <span>CareEase</span>
+      {/* Mobile Overlay */}
+      {isSidebarOpen && (
+        <div 
+          className={styles.overlay} 
+          onClick={() => setIsSidebarOpen(false)}
+        />
+      )}
+
+      <aside className={`${styles.sidebar} ${isSidebarOpen ? styles.sidebarOpen : ''} glass`}>
+        <div className={styles.sidebarHeader}>
+          <div className={styles.logo}>
+            <div className={styles.logoIcon}>C</div>
+            <span>CareEase</span>
+          </div>
+          <button 
+            className={styles.closeBtn} 
+            onClick={() => setIsSidebarOpen(false)}
+          >
+            <X size={24} />
+          </button>
         </div>
         
         <nav className={styles.nav}>
@@ -59,7 +83,15 @@ const Layout = () => {
       <main className={styles.main}>
         <header className={`${styles.header} glass`}>
           <div className={styles.headerContent}>
-            <h1>Welcome back, {user?.email?.split('@')[0] || 'Provider'}</h1>
+            <div className={styles.headerLeft}>
+              <button 
+                className={styles.menuBtn} 
+                onClick={() => setIsSidebarOpen(true)}
+              >
+                <Menu size={24} />
+              </button>
+              <h1>Welcome, {user?.email?.split('@')[0] || 'Provider'}</h1>
+            </div>
             <div className={styles.headerActions}>
               <button onClick={triggerNotification} className={styles.notifBtn}>
                 <Bell size={20} />

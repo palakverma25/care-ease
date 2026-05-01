@@ -130,3 +130,13 @@
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 768px) {
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .chartContainer, .recentPatients {
+    padding: 1.25rem;
+  }
+}

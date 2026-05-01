@@ -15,6 +15,13 @@
   border-right: 1px solid var(--border-glass);
 }
 
+.sidebarHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
 .logo {
   display: flex;
   align-items: center;
@@ -22,7 +29,12 @@
   font-size: 1.5rem;
   font-weight: 700;
   color: var(--primary);
-  margin-bottom: 3rem;
+}
+
+.closeBtn {
+  display: none;
+  background: transparent;
+  color: var(--text-muted);
 }
 
 .logoIcon {
@@ -106,6 +118,18 @@
   align-items: center;
 }
 
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.menuBtn {
+  display: none;
+  background: transparent;
+  color: var(--text-muted);
+}
+
 .header h1 {
   font-size: 1.25rem;
   font-weight: 600;
@@ -140,8 +164,43 @@
   overflow-y: auto;
 }
 
-@media (max-width: 768px) {
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 6, 23, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 900;
+}
+
+@media (max-width: 1024px) {
   .sidebar {
-    display: none; /* Mobile menu needed */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    background: var(--bg-main) !important;
+  }
+
+  .sidebarOpen {
+    transform: translateX(0);
+  }
+
+  .closeBtn, .menuBtn {
+    display: flex;
+  }
+
+  .main {
+    padding: 1rem;
+  }
+
+  .header {
+    padding: 0.75rem 1.25rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .header h1 {
+    display: none; /* Hide welcome text on very small screens to save space */
   }
 }
